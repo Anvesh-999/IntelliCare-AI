@@ -1,5 +1,7 @@
 {
   "name": "intellicare-ai-workspace",
+  "description": "IntelliCare AI — Smart Healthcare & Hospital Management Platform",
+  "homepage": "https://intelli-care-ai-dalt.vercel.app/",
   "private": true,
   "version": "1.0.0",
   "scripts": {

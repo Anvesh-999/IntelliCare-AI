@@ -3,6 +3,7 @@ const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
 const dotenv = require('dotenv');
+const mongoose = require('mongoose');
 
 // Load environment variables
 dotenv.config();
@@ -27,6 +28,18 @@ const app = express();
 app.use(cors({ origin: '*' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Database Readiness Check Middleware
+app.use('/api', (req, res, next) => {
+  // readyState: 0 = disconnected, 1 = connected, 2 = connecting, 3 = disconnecting
+  if (mongoose.connection.readyState !== 1 && mongoose.connection.readyState !== 2) {
+    return res.status(503).json({
+      success: false,
+      message: 'Database Connection Error: Backend server is unable to connect to MongoDB Atlas. Please verify your MONGO_URI credentials in Render environment variables and ensure 0.0.0.0/0 is allowed in MongoDB Atlas Network Access.'
+    });
+  }
+  next();
+});
 
 // Ensure upload directories exist
 const uploadDir = path.join(__dirname, 'public', 'uploads');

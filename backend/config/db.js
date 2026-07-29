@@ -208,15 +208,19 @@ const seedData = async () => {
 };
 
 const connectDB = async () => {
-  let mongoUri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/intellicare';
+  let mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/intellicare';
   
   // Ensure database name is explicitly specified in Atlas connection strings
   if (mongoUri.includes('mongodb.net/?') && !mongoUri.includes('mongodb.net/intellicare')) {
     mongoUri = mongoUri.replace('mongodb.net/?', 'mongodb.net/intellicare?');
   }
 
+  const connectOptions = {
+    serverSelectionTimeoutMS: 5000 // Fast fail (5s) instead of default 30s buffering timeout
+  };
+
   try {
-    await mongoose.connect(mongoUri);
+    await mongoose.connect(mongoUri, connectOptions);
     console.log('[MongoDB] Connected successfully to database');
 
     // Auto-seed if the User collection is completely empty
@@ -226,7 +230,22 @@ const connectDB = async () => {
     }
   } catch (err) {
     console.error(`[MongoDB] Connection error: ${err.message}`);
-    console.warn('[MongoDB] Please check MONGO_URI username, password, and Atlas Database Access settings.');
+    console.warn('[MongoDB] Please check MONGO_URI username, password, and Atlas Network Access settings (0.0.0.0/0).');
+
+    // Fallback to local MongoDB if remote connection fails and we are not explicitly forced to cloud
+    if (mongoUri.includes('mongodb.net') && process.env.NODE_ENV !== 'production') {
+      console.log('[MongoDB] Attempting fallback connection to local MongoDB (mongodb://127.0.0.1:27017/intellicare)...');
+      try {
+        await mongoose.connect('mongodb://127.0.0.1:27017/intellicare', connectOptions);
+        console.log('[MongoDB] Connected successfully to local database fallback!');
+        const userCount = await User.countDocuments();
+        if (userCount === 0) {
+          await seedData();
+        }
+      } catch (localErr) {
+        console.error(`[MongoDB] Local database fallback also failed: ${localErr.message}`);
+      }
+    }
   }
 };
 

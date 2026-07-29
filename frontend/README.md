@@ -1,6 +1,8 @@
-# React + Vite
+# 🏥 IntelliCare AI — Frontend Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+> 🌐 **Live Demo**: [https://intelli-care-ai-dalt.vercel.app/](https://intelli-care-ai-dalt.vercel.app/)
+
+Built with React 19, Vite, Tailwind CSS v4, and Lucide Icons.
 
 Currently, two official plugins are available:
 

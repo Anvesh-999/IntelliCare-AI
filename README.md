@@ -1,10 +1,13 @@
 # 🏥 IntelliCare AI — Smart Healthcare & Hospital Management Platform (Native & Standalone)
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://intelli-care-ai-dalt.vercel.app/)
 ![License](https://img.shields.io/badge/License-MIT-blue.svg)
 ![React](https://img.shields.io/badge/Frontend-React%2019%20%7C%20Vite%20%7C%20Tailwind-61DAFB?logo=react)
 ![Node.js](https://img.shields.io/badge/Backend-Node.js%20%7C%20Express-339933?logo=node.js)
 ![FastAPI](https://img.shields.io/badge/AI%20Engine-FastAPI%20%7C%20Python-009688?logo=fastapi)
 ![MongoDB](https://img.shields.io/badge/Database-MongoDB-47A248?logo=mongodb)
+
+> 🚀 **Live Web Application**: [https://intelli-care-ai-dalt.vercel.app/](https://intelli-care-ai-dalt.vercel.app/)
 
 **IntelliCare AI** is an intelligent, multi-service healthcare ecosystem and hospital management system (HMS). Powered by artificial intelligence, automated Optical Character Recognition (OCR), medical report summarizers, drug interaction engines, and role-tailored dashboards, IntelliCare AI connects patients, doctors, laboratories, pharmacies, and hospital administrators in a unified digital platform.
 
