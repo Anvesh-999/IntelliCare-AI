@@ -208,10 +208,16 @@ const seedData = async () => {
 };
 
 const connectDB = async () => {
-  const mongoUri = process.env.MONGO_URI || 'mongodb://localhost:27017/intellicare';
+  let mongoUri = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/intellicare';
+  
+  // Ensure database name is explicitly specified in Atlas connection strings
+  if (mongoUri.includes('mongodb.net/?') && !mongoUri.includes('mongodb.net/intellicare')) {
+    mongoUri = mongoUri.replace('mongodb.net/?', 'mongodb.net/intellicare?');
+  }
+
   try {
     await mongoose.connect(mongoUri);
-    console.log('[MongoDB] Connected successfully');
+    console.log('[MongoDB] Connected successfully to database');
 
     // Auto-seed if the User collection is completely empty
     const userCount = await User.countDocuments();
@@ -220,7 +226,7 @@ const connectDB = async () => {
     }
   } catch (err) {
     console.error(`[MongoDB] Connection error: ${err.message}`);
-    process.exit(1);
+    console.warn('[MongoDB] Please check MONGO_URI username, password, and Atlas Database Access settings.');
   }
 };
 
