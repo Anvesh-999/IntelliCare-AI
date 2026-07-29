@@ -1,6 +1,7 @@
 {
   "version": 2,
-  "outputDirectory": "dist",
+  "buildCommand": "npm run build --prefix frontend",
+  "outputDirectory": "frontend/dist",
   "framework": "vite",
   "rewrites": [
     { "source": "/api/:path*", "destination": "https://intellicare-backend-hb1z.onrender.com/api/:path*" },
