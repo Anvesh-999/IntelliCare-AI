@@ -70,6 +70,23 @@ router.post('/register', async (req, res) => {
   }
 });
 
+// @route   GET /api/auth/seed
+// @desc    Trigger database seeding if empty
+// @access  Public
+router.get('/seed', async (req, res) => {
+  try {
+    const connectDB = require('../config/db');
+    if (connectDB.seedData) {
+      await connectDB.seedData();
+      return res.json({ success: true, message: 'Database seeded successfully with demo users' });
+    }
+    res.json({ success: true, message: 'Database ready' });
+  } catch (err) {
+    console.error('[Seed Error]', err);
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
 // @route   POST /api/auth/login
 // @desc    Authenticate user & get token
 // @access  Public
@@ -77,24 +94,32 @@ router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   try {
+    if (!email || !password) {
+      return res.status(400).json({ success: false, message: 'Please provide email and password' });
+    }
+
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({ success: false, message: 'Invalid credentials' });
+      return res.status(400).json({ success: false, message: 'Invalid email or password' });
     }
 
     const isMatch = await user.comparePassword(password);
     if (!isMatch) {
-      return res.status(400).json({ success: false, message: 'Invalid credentials' });
+      return res.status(400).json({ success: false, message: 'Invalid email or password' });
     }
 
-    // Log Action
-    await AuditLog.create({
-      user: user._id,
-      email: user.email,
-      role: user.role,
-      action: 'LOGIN_SUCCESS',
-      details: `User logged in: ${user.email}`
-    });
+    // Non-blocking Audit Logging
+    try {
+      await AuditLog.create({
+        user: user._id,
+        email: user.email,
+        role: user.role,
+        action: 'LOGIN_SUCCESS',
+        details: `User logged in: ${user.email}`
+      });
+    } catch (auditErr) {
+      console.warn('[AuditLog Warning]', auditErr.message);
+    }
 
     res.json({
       success: true,
@@ -107,8 +132,8 @@ router.post('/login', async (req, res) => {
       }
     });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ success: false, message: 'Server error during login' });
+    console.error('[Auth Login Error]', err);
+    res.status(500).json({ success: false, message: err.message || 'Server error during login' });
   }
 });
 

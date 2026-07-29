@@ -242,4 +242,5 @@ if (require.main === module) {
   runDirectSeed();
 }
 
+connectDB.seedData = seedData;
 module.exports = connectDB;
