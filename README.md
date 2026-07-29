@@ -5,7 +5,6 @@
 ![Node.js](https://img.shields.io/badge/Backend-Node.js%20%7C%20Express-339933?logo=node.js)
 ![FastAPI](https://img.shields.io/badge/AI%20Engine-FastAPI%20%7C%20Python-009688?logo=fastapi)
 ![MongoDB](https://img.shields.io/badge/Database-MongoDB-47A248?logo=mongodb)
-![Execution](https://img.shields.io/badge/Setup-Native%20%7C%20No%20Docker%20%7C%20No%20Redis-brightgreen)
 
 **IntelliCare AI** is an intelligent, multi-service healthcare ecosystem and hospital management system (HMS). Powered by artificial intelligence, automated Optical Character Recognition (OCR), medical report summarizers, drug interaction engines, and role-tailored dashboards, IntelliCare AI connects patients, doctors, laboratories, pharmacies, and hospital administrators in a unified digital platform.
 
