@@ -95,11 +95,11 @@ class GeminiEmbeddingService(BaseEmbeddingService):
         from google import genai
         self._client = genai.Client(api_key=self.api_key)
         self.model_name = "text-embedding-004"
-        self._fallback = LocalSemanticEmbeddingService(dim=768)
+        self._fallback = LocalSemanticEmbeddingService(dim=384)
 
     @property
     def dimension(self) -> int:
-        return 768
+        return 384
 
     async def embed_text(self, text: str) -> List[float]:
         batch = await self.embed_batch([text])

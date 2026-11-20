@@ -75,6 +75,23 @@ class VectorStore:
                     metadatas=metadatas
                 )
             except Exception as e:
+                if "expecting embedding with dimension" in str(e) and self.chroma_client:
+                    try:
+                        self.chroma_client.delete_collection(name=self.collection_name)
+                        self.collection = self.chroma_client.get_or_create_collection(
+                            name=self.collection_name,
+                            metadata={"hnsw:space": "cosine"}
+                        )
+                        self.collection.upsert(
+                            ids=ids,
+                            embeddings=embeddings,
+                            documents=documents,
+                            metadatas=metadatas
+                        )
+                        logger.info("Recreated ChromaDB collection '%s' with updated embedding dimension.", self.collection_name)
+                        return len(chunks)
+                    except Exception as inner_e:
+                        logger.error("Failed to recreate ChromaDB collection: %s", str(inner_e))
                 logger.error("Error upserting to ChromaDB: %s", str(e))
 
         return len(chunks)
