@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-20T11:39:32Z",
-  "duration_seconds": 2.5,
+  "timestamp": "2026-11-20T13:23:46Z",
+  "duration_seconds": 2.73,
   "overall_status": "PASSED",
   "summary_metrics": {
     "retrieval_hit_rate": 1.0,
