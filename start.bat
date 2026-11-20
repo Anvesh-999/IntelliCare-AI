@@ -1,7 +1,7 @@
 @echo off
 TITLE IntelliCare AI - Microservice Launcher
 echo ===================================================
-echo   Starting IntelliCare AI Microservices (No Docker)
+echo   Starting IntelliCare AI Microservices
 echo ===================================================
 echo.
 
@@ -9,7 +9,7 @@ echo [1/3] Starting Express Backend (Port 5000)...
 start "IntelliCare Backend" cmd /k "cd backend && npm run dev"
 
 echo [2/3] Starting FastAPI AI Service (Port 8000)...
-start "IntelliCare AI Engine" cmd /k "cd ai_service && python main.py"
+start "IntelliCare AI Engine" cmd /k "cd ai_service && (py -3.11 main.py 2>nul || python main.py)"
 
 echo [3/3] Starting Vite React Frontend (Port 3000)...
 start "IntelliCare Frontend" cmd /k "cd frontend && npm run dev"

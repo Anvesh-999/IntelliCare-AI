@@ -1,0 +1,37 @@
+CLINICAL REFERENCE: LABORATORY INTERPRETATION - COMPLETE BLOOD COUNT (CBC) & LIPID PANEL
+Document ID: guideline-lab-cbc-lipid-2025
+Category: hematology
+
+1. COMPLETE BLOOD COUNT (CBC) STANDARD ADULT INTERVALS:
+- Hemoglobin (Hb):
+  * Adult Males: 13.8 to 17.2 g/dL (138 - 172 g/L)
+  * Adult Females: 12.1 to 15.1 g/dL (121 - 151 g/L)
+  * Clinical Alert: Low Hb indicates anemia (microcytic iron deficiency, chronic disease, or hemolytic). Symptoms: fatigue, pale conjunctiva, shortness of breath on exertion. Elevated Hb (>18.0 g/dL) occurs in chronic hypoxia, smoking, or polycythemia.
+- White Blood Cell Count (WBC):
+  * Reference: 4,500 to 11,000 cells/mcL (4.5 - 11.0 x 10^9/L)
+  * Leukocytosis (>11,000): In response to acute bacterial infections, systemic inflammation, severe physical stress, or corticosteroids.
+  * Leukopenia (<4,000): Viral infections, autoimmune disorders, bone marrow suppression.
+- Platelets:
+  * Reference: 150,000 to 450,000 /mcL
+  * Thrombocytopenia (<150,000): Bleeding and bruising risks increase significantly when platelets fall below 50,000 /mcL.
+
+2. LIPID (CHOLESTEROL) PANEL ADULT GUIDELINES:
+- Total Cholesterol:
+  * Desirable: < 200 mg/dL
+  * Borderline High: 200 - 239 mg/dL
+  * High: >= 240 mg/dL
+- High-Density Lipoprotein (HDL) "Good" Cholesterol:
+  * Protective: >= 60 mg/dL
+  * Acceptable: 40 - 59 mg/dL (men), 50 - 59 mg/dL (women)
+  * Low (Cardiovascular Risk): < 40 mg/dL (men), < 50 mg/dL (women)
+- Low-Density Lipoprotein (LDL) "Bad" Cholesterol:
+  * Optimal: < 100 mg/dL (For patients with known coronary artery disease: target < 70 mg/dL)
+  * Near Optimal: 100 - 129 mg/dL
+  * Borderline High: 130 - 159 mg/dL
+  * High: 160 - 189 mg/dL
+  * Very High: >= 190 mg/dL (Warrants statin therapy evaluation)
+- Triglycerides:
+  * Normal: < 150 mg/dL
+  * Borderline High: 150 - 199 mg/dL
+  * High: 200 - 499 mg/dL
+  * Very High: >= 500 mg/dL (Increases risk of acute pancreatitis)

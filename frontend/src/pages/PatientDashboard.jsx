@@ -9,6 +9,7 @@ import { Chart as ChartJS, registerables } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 
 ChartJS.register(...registerables);
+import ClinicalChatAssistant from '../components/Chat/ClinicalChatAssistant';
 
 const PatientDashboard = ({ activeTab }) => {
   const { token, API_BASE } = useContext(AuthContext);
@@ -738,85 +739,10 @@ const PatientDashboard = ({ activeTab }) => {
         </div>
       )}
 
-      {/* 5. AI Chat Assistant Tab */}
+      {/* 5. AI Chat Assistant Tab (Phase 8: Clinical Assistant with Thread Management & RAG) */}
       {activeTab === 'chat' && (
-        <div className="max-w-2xl mx-auto glass-panel border-white/5 flex flex-col h-[550px] animate-fade-in">
-          {/* Chat Header */}
-          <div className="px-5 py-3 border-b border-white/5 bg-slate-900/40 flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-medical-teal/10 flex items-center justify-center text-medical-mint border border-medical-teal/20">
-              <Sparkles className="w-4 h-4" />
-            </div>
-            <div>
-              <h4 className="font-bold text-sm text-slate-200">Cognitive Health Assistant</h4>
-              <span className="text-[10px] text-slate-500">Connected to patient medical records securely</span>
-            </div>
-          </div>
-
-          {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-3 custom-scrollbar">
-            {chatHistory.length === 0 ? (
-              <div className="flex flex-col items-center justify-center gap-2 h-full text-slate-500">
-                <Smile className="w-8 h-8 text-slate-600 animate-bounce" />
-                <p className="text-xs">Hi! Type any healthcare query to begin assistant chat.</p>
-              </div>
-            ) : (
-              chatHistory.map((msg, index) => {
-                const isAI = msg.sender === 'ai';
-                return (
-                  <div 
-                    key={index}
-                    className={`flex gap-3 max-w-[85%] ${isAI ? 'self-start' : 'self-end flex-row-reverse'}`}
-                  >
-                    <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 border text-xs font-bold ${
-                      isAI 
-                        ? 'bg-medical-teal/10 border-medical-teal/20 text-medical-mint' 
-                        : 'bg-white/5 border-white/10 text-slate-300'
-                    }`}>
-                      {isAI ? 'AI' : 'P'}
-                    </div>
-                    <div className={`p-3 rounded-2xl text-xs leading-relaxed border ${
-                      isAI 
-                        ? 'bg-darkbg-900 border-white/5 text-slate-300' 
-                        : 'bg-medical-teal/15 border-medical-teal/20 text-slate-200'
-                    }`}>
-                      {msg.message}
-                    </div>
-                  </div>
-                );
-              })
-            )}
-            {sendingChat && (
-              <div className="flex gap-3 self-start max-w-[85%] items-center">
-                <div className="w-7 h-7 rounded-full bg-medical-teal/10 border border-medical-teal/20 text-medical-mint flex items-center justify-center text-xs font-bold">
-                  AI
-                </div>
-                <div className="flex gap-1 py-2 px-3 bg-darkbg-900 border border-white/5 rounded-2xl">
-                  <span className="w-1.5 h-1.5 rounded-full bg-slate-500 animate-bounce"></span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-slate-500 animate-bounce [animation-delay:0.2s]"></span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-slate-500 animate-bounce [animation-delay:0.4s]"></span>
-                </div>
-              </div>
-            )}
-            <div ref={chatEndRef} />
-          </div>
-
-          {/* Form Input Area */}
-          <form onSubmit={handleSendChat} className="p-3 border-t border-white/5 flex gap-2">
-            <input
-              type="text"
-              value={chatQuery}
-              onChange={(e) => setChatQuery(e.target.value)}
-              placeholder="Ask a question about health recommendations..."
-              className="flex-1 bg-darkbg-950/80 border border-white/10 rounded-xl px-4 py-2 text-xs text-slate-200 focus:outline-none focus:border-medical-teal"
-            />
-            <button
-              type="submit"
-              disabled={sendingChat}
-              className="w-9 h-9 bg-gradient-to-tr from-medical-teal to-medical-mint text-white rounded-xl flex items-center justify-center hover:opacity-95 shrink-0"
-            >
-              <Send className="w-4 h-4" />
-            </button>
-          </form>
+        <div className="max-w-5xl mx-auto">
+          <ClinicalChatAssistant token={token} apiBase={API_BASE} />
         </div>
       )}
     </div>

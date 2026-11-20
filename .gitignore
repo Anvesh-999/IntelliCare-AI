@@ -28,6 +28,21 @@ yarn-debug.log*
 public/uploads/*
 !public/uploads/.gitkeep
 
+# Vector Store / Local Database
+/data/
+**/chroma_db/
+*.sqlite3
+*.bin
+!ai_service/data/
+!ai_service/data/reference_docs/
+!ai_service/data/reference_docs/*
+
+# Test & coverage caches
+.pytest_cache/
+**/.pytest_cache/
+.coverage
+htmlcov/
+
 # IDE & OS files
 .vscode/
 .idea/

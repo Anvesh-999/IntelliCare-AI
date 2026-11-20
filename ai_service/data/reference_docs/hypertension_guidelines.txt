@@ -1,0 +1,22 @@
+CLINICAL REFERENCE: AMERICAN HEART ASSOCIATION & ACC HYPERTENSION GUIDELINES (2025-2026 SUMMARY)
+Document ID: guideline-cardio-hypertension-2025
+Category: cardiology
+
+1. BLOOD PRESSURE CATEGORIES IN ADULTS:
+- Normal Blood Pressure: Systolic less than 120 mm Hg AND Diastolic less than 80 mm Hg. Recommendation: Healthy lifestyle choices, yearly checkup.
+- Elevated Blood Pressure: Systolic 120-129 mm Hg AND Diastolic less than 80 mm Hg. Recommendation: Lifestyle modification (DASH diet, sodium reduction), re-evaluation in 3-6 months.
+- Hypertension Stage 1: Systolic 130-139 mm Hg OR Diastolic 80-89 mm Hg. Recommendation: Assess 10-year ASCVD risk. If risk >= 10%, initiate first-line antihypertensive medication plus lifestyle intervention. Re-evaluate in 1 month.
+- Hypertension Stage 2: Systolic 140 mm Hg or higher OR Diastolic 90 mm Hg or higher. Recommendation: Initiate combination therapy with 2 first-line medications of different classes plus lifestyle interventions.
+- Hypertensive Crisis: Systolic exceeding 180 mm Hg and/or Diastolic exceeding 120 mm Hg. Prompt evaluation is critical. If associated with acute organ damage (chest pain, shortness of breath, back pain, numbness, vision changes), immediate emergency care (911) is required.
+
+2. FIRST-LINE PHARMACOTHERAPY CLASSES:
+- Angiotensin-Converting Enzyme (ACE) Inhibitors: e.g., Lisinopril, Enalapril. Common side effect: dry cough, hyperkalemia.
+- Angiotensin Receptor Blockers (ARBs): e.g., Losartan, Valsartan. Alternative when ACE inhibitors cause cough.
+- Calcium Channel Blockers (CCBs): e.g., Amlodipine, Diltiazem. Common side effect: peripheral edema.
+- Thiazide Diuretics: e.g., Chlorthalidone, Hydrochlorothiazide.
+
+3. LIFESTYLE INTERVENTIONS:
+- DASH Eating Plan: Rich in fruits, vegetables, whole grains, low-fat dairy; reduced saturated fats.
+- Sodium Reduction: Target < 1,500 mg/day optimal, or at least a 1,000 mg/day reduction in adults with hypertension.
+- Physical Activity: 90-150 minutes per week of aerobic exercise plus dynamic resistance exercises.
+- Weight Reduction: Expect ~1 mm Hg blood pressure reduction per 1 kg loss in body weight.

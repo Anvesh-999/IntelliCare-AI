@@ -1,0 +1,27 @@
+CLINICAL REFERENCE: AMERICAN DIABETES ASSOCIATION (ADA) STANDARDS OF CARE - GLYCEMIC TARGETS
+Document ID: guideline-endo-diabetes-2025
+Category: endocrinology
+
+1. DIAGNOSTIC CRITERIA FOR DIABETES AND PREDIABETES:
+- Fasting Plasma Glucose (FPG):
+  * Normal: < 100 mg/dL (5.6 mmol/L)
+  * Prediabetes (Impaired Fasting Glucose): 100 mg/dL to 125 mg/dL (5.6 - 6.9 mmol/L)
+  * Diabetes: >= 126 mg/dL (7.0 mmol/L) confirmed on repeat testing.
+- Hemoglobin A1c (HbA1c):
+  * Normal: < 5.7%
+  * Prediabetes: 5.7% to 6.4% (39 - 47 mmol/mol)
+  * Diabetes: >= 6.5% (48 mmol/mol) confirmed on repeat testing.
+- 2-Hour Oral Glucose Tolerance Test (OGTT):
+  * Normal: < 140 mg/dL
+  * Prediabetes: 140 to 199 mg/dL
+  * Diabetes: >= 200 mg/dL
+
+2. GLYCEMIC TARGETS FOR NON-PREGNANT ADULTS WITH DIABETES:
+- HbA1c: General goal < 7.0% (53 mmol/mol) for most nonpregnant adults. More stringent (<6.5%) if achieved without hypoglycemia. Less stringent (<8.0%) for patients with severe hypoglycemia history or limited life expectancy.
+- Preprandial Capillary Blood Glucose: 80 - 130 mg/dL (4.4 - 7.2 mmol/L).
+- Peak Postprandial Blood Glucose (1-2 hours after meal): < 180 mg/dL (10.0 mmol/L).
+
+3. PHARMACOLOGIC PRINCIPLES (TYPE 2 DIABETES):
+- First-Line Therapy: Metformin along with comprehensive lifestyle modifications (medical nutrition therapy, physical activity).
+- Cardiovascular and Renal Protection: For patients with established ASCVD, heart failure, or chronic kidney disease (CKD), SGLT2 inhibitors (e.g., Empagliflozin) or GLP-1 receptor agonists (e.g., Semaglutide) with demonstrated CVD benefit are recommended.
+- Hypoglycemia Alert: Blood glucose < 70 mg/dL requires immediate treatment with 15 grams of fast-acting carbohydrate (rule of 15).
