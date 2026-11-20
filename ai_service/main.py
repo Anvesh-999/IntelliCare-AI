@@ -99,7 +99,7 @@ class NutritionRequest(BaseModel):
     diet_preference: str
     conditions: List[str]
 
-@app.get("/")
+@app.api_route("/", methods=["GET", "HEAD"])
 def read_root():
     return {
         "status": "IntelliCare AI Service is running successfully",
@@ -108,7 +108,7 @@ def read_root():
         "model": settings.GEMINI_MODEL
     }
 
-@app.get("/health")
+@app.api_route("/health", methods=["GET", "HEAD"])
 def health_check():
     from rag.retriever import get_retriever
     from tools.registry import get_tool_registry
