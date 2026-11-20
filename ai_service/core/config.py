@@ -15,8 +15,8 @@ class Settings(BaseSettings):
     LLM_PROVIDER: str = "gemini"  # Supported: "gemini", "mock", "openai"
     GEMINI_API_KEY: Optional[str] = None
     GOOGLE_API_KEY: Optional[str] = None
-    GEMINI_MODEL: str = "gemini-3.8-flash"
-    GEMINI_FALLBACK_MODEL: str = "gemini-3.8-flash"
+    GEMINI_MODEL: str = "gemini-3.5-flash"
+    GEMINI_FALLBACK_MODEL: str = "gemini-3.5-flash-lite"
     
     OPENAI_API_KEY: Optional[str] = None
     OPENAI_MODEL: str = "gpt-4o-mini"

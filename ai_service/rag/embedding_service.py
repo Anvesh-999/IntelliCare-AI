@@ -94,7 +94,7 @@ class GeminiEmbeddingService(BaseEmbeddingService):
         self.api_key = api_key or settings.effective_gemini_key
         from google import genai
         self._client = genai.Client(api_key=self.api_key)
-        self.model_name = "text-embedding-004"
+        self.model_name = "gemini-embedding-001"
         self._fallback = LocalSemanticEmbeddingService(dim=384)
 
     @property
@@ -109,9 +109,12 @@ class GeminiEmbeddingService(BaseEmbeddingService):
         if not texts:
             return []
         try:
+            from google.genai import types
+            config = types.EmbedContentConfig(output_dimensionality=384)
             response = await self._client.aio.models.embed_content(
                 model=self.model_name,
-                contents=texts
+                contents=texts,
+                config=config
             )
             embeddings = []
             for item in response.embeddings:

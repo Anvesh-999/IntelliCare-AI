@@ -195,6 +195,13 @@ class GeminiProvider(BaseLLMProvider):
                 err_msg = sanitize_for_logs(str(e))
                 logger.error("Gemini API error on attempt %d: %s", attempt, err_msg)
                 
+                if "503" in err_msg or "UNAVAILABLE" in err_msg or "high demand" in err_msg:
+                    if chosen_model != settings.GEMINI_FALLBACK_MODEL:
+                        logger.warning("Gemini model %s unavailable (503). Switching to fallback model %s.", chosen_model, settings.GEMINI_FALLBACK_MODEL)
+                        chosen_model = settings.GEMINI_FALLBACK_MODEL
+                        await asyncio.sleep(0.5)
+                        continue
+
                 if "429" in err_msg or "RESOURCE_EXHAUSTED" in err_msg:
                     if attempt == max_retries:
                         raise LLMRateLimitError(f"Gemini API rate limit exceeded: {err_msg}")
@@ -276,6 +283,13 @@ class GeminiProvider(BaseLLMProvider):
             except Exception as e:
                 err_msg = sanitize_for_logs(str(e))
                 logger.error("Gemini structured call error on attempt %d: %s", attempt, err_msg)
+                if "503" in err_msg or "UNAVAILABLE" in err_msg or "high demand" in err_msg:
+                    if chosen_model != settings.GEMINI_FALLBACK_MODEL:
+                        logger.warning("Gemini model %s unavailable (503). Switching to fallback model %s.", chosen_model, settings.GEMINI_FALLBACK_MODEL)
+                        chosen_model = settings.GEMINI_FALLBACK_MODEL
+                        await asyncio.sleep(0.5)
+                        continue
+
                 if "429" in err_msg or "RESOURCE_EXHAUSTED" in err_msg:
                     if attempt == max_retries:
                         raise LLMRateLimitError(f"Gemini API rate limit exceeded: {err_msg}")
