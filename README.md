@@ -5,11 +5,14 @@
 ![React](https://img.shields.io/badge/Frontend-React%2019%20%7C%20Vite%20%7C%20Tailwind-61DAFB?logo=react)
 ![Node.js](https://img.shields.io/badge/Backend-Node.js%20%7C%20Express-339933?logo=node.js)
 ![FastAPI](https://img.shields.io/badge/AI%20Microservice-FastAPI%20%7C%20Python%203.11-009688?logo=fastapi)
-![Google Gemini](https://img.shields.io/badge/LLM-Google%20Gemini%203.8%20Flash-4285F4?logo=google)
-![ChromaDB](https://img.shields.io/badge/Vector%20Store-ChromaDB%20%7C%20Embeddings-FF6F00)
+![Google Gemini](https://img.shields.io/badge/LLM-Google%20Gemini%203.5%20Flash-4285F4?logo=google)
+![ChromaDB](https://img.shields.io/badge/Vector%20Store-ChromaDB%20%7C%20Embeddings%20(384--d)-FF6F00)
 ![MongoDB](https://img.shields.io/badge/Database-MongoDB%20Atlas-47A248?logo=mongodb)
 
-> 🚀 **Live Web Application**: [https://intelli-care-ai-dalt.vercel.app/](https://intelli-care-ai-dalt.vercel.app/)
+> 🚀 **Live Production Deployment**:
+> - **Web Application (Vercel)**: [https://intelli-care-ai-dalt.vercel.app/](https://intelli-care-ai-dalt.vercel.app/)
+> - **Backend Gateway (Render)**: [https://intellicare-backend-hb1z.onrender.com/health](https://intellicare-backend-hb1z.onrender.com/health)
+> - **AI Engine Microservice (Render)**: [https://intellicare-ai-service.onrender.com/health](https://intellicare-ai-service.onrender.com/health)
 
 **IntelliCare AI** is a production-grade, multi-tier healthcare operating system and clinical AI assistant. Designed for hospitals, outpatient clinics, and diagnostic labs, it combines an Express.js API Gateway, a React 19 clinical portal, and a dedicated Python FastAPI AI Microservice featuring **real Google Gemini LLM integration**, **Pydantic structured generation**, **semantic vector search (ChromaDB)**, **Retrieval-Augmented Generation (RAG)**, **controlled clinical tool calling**, **multi-turn context management**, and **deterministic safety guardrails**.
 
@@ -45,7 +48,7 @@ flowchart TD
     subgraph AIService ["FastAPI AI Microservice (Python 3.11, Port: 8000)"]
         Router["FastAPI REST Router"]
         Safety["Clinical Safety & Privacy Engine\n(Emergency Interceptor, Dosage Refusal, PII Redaction)"]
-        LLM["Google Gemini Provider / BaseLLM\n(gemini-3.8-flash, Async, Retries, Timeouts)"]
+        LLM["Google Gemini Provider / BaseLLM\n(gemini-3.5-flash + Fallback, Async, Retries)"]
         RAG["Clinical RAG Pipeline\n(ChromaDB Cosine Index + Document Loader)"]
         Tools["Controlled Tool Registry & Agent\n(Drug Interactions, OCR, Lab Interpretation)"]
         Schemas["Pydantic Structured Validation"]
@@ -75,9 +78,9 @@ flowchart TD
 
 ## 🧠 Key AI Capabilities & Engineering Highlights
 
-- **Real LLM Integration**: Official `google-genai` SDK with async non-blocking execution (`client.aio.models.generate_content`), configurable models (`gemini-3.8-flash`), exponential backoff retries, and request timeouts.
+- **Real LLM Integration**: Official `google-genai` SDK with async non-blocking execution (`client.aio.models.generate_content`), production models (`gemini-3.5-flash` with auto-resilient fallback to `gemini-3.5-flash-lite`), exponential backoff retries, and request timeouts.
 - **Strict Structured Outputs**: Constrained Pydantic V2 generation (`ClinicalGeneralResponse`, `ReportExplanationResponse`, `PrescriptionExtractionResponse`) separating factual findings from explanations and preventing invented medical measurements.
-- **Semantic Embeddings & Vector Search**: Document chunker with overlap, ChromaDB cosine similarity index, and unit-norm vector fallback.
+- **Semantic Embeddings & Vector Search**: Google GenAI `gemini-embedding-001` (unit-normalized 384-d vectors), ChromaDB cosine index, and hermetic in-memory NumPy fallback.
 - **Grounded RAG Pipeline**: Hardened system prompts enforcing XML separation (`<retrieved_clinical_references>` vs `<private_patient_record>`), prompt injection neutralization, and verifiable source citations.
 - **Controlled Tool Execution Registry**: Safe function calling registry with whitelist enforcement, Pydantic argument validation, execution timeouts (`asyncio.wait_for`), and cross-patient authorization checks.
 - **HIPAA-Inspired Privacy & Context**: Multi-thread conversation management in MongoDB, sliding window context management (last 10 turns), explicit patient consent gating, and 30-day session expiration.
@@ -215,10 +218,24 @@ cp ai_service/.env.example ai_service/.env
 Add your **Google Gemini API Key** in `ai_service/.env`:
 ```env
 GEMINI_API_KEY=AIzaSy...your_actual_key_here
-GEMINI_MODEL=gemini-3.8-flash
+GEMINI_MODEL=gemini-3.5-flash
+GEMINI_FALLBACK_MODEL=gemini-3.5-flash-lite
 ```
 
-### 3. Install Dependencies & Start Services
+### 3. Pre-Seeded Demo Accounts
+
+Default password for all roles: **`password123`**
+
+| Role | Email | Clinical Capabilities |
+| :--- | :--- | :--- |
+| **🧑‍🦽 Patient** | `patient@intellicare.com` | Multi-turn RAG Chat Assistant, verifiable reference cards, consent toggle, appointments |
+| **👨‍⚕️ Doctor** | `doctor@intellicare.com` | Patient consultation timelines, medical record explanations, prescription orders |
+| **🔬 Laboratory** | `lab@intellicare.com` | Diagnostic report entry, lab panel verification |
+| **💊 Pharmacy** | `pharmacy@intellicare.com` | Prescription dispensing, drug-drug interaction contraindication checks |
+| **🏢 Hospital Admin** | `hadmin@intellicare.com` | Department occupancy, revenue analytics, staff workload metrics |
+| **🛡️ System Admin** | `admin@intellicare.com` | User role management, audit logging |
+
+### 4. Install Dependencies & Start Services
 
 #### Option A: One-Click Startup (Windows)
 Double-click `start.bat` or run:
@@ -277,6 +294,32 @@ node backend/tests/test_chat_context.js
 cd frontend
 npm run build
 ```
+
+---
+
+## ☁️ Cloud Deployment Architecture
+
+IntelliCare AI is configured for one-click deployment across Vercel and Render:
+
+```
+[React 19 Frontend (Vercel)] ──HTTPS / Rewrites──> [Express Gateway (Render)] ──Proxy──> [FastAPI AI Engine (Render)]
+```
+
+### 1. Vercel (Frontend SPA)
+- **Live URL**: [https://intelli-care-ai-dalt.vercel.app/](https://intelli-care-ai-dalt.vercel.app/)
+- **Root Directory**: `frontend`
+- **Framework Preset**: `Vite`
+- **Build / Install**: Auto-detected (`npm run build`, `npm install --legacy-peer-deps`)
+- **API Rewrites**: Defined in `vercel.json` routing `/api/*` to the Render Express Gateway and `/ai/*` to the FastAPI AI service.
+
+### 2. Render (Express Gateway + FastAPI AI Service)
+- **Backend Service**: [https://intellicare-backend-hb1z.onrender.com](https://intellicare-backend-hb1z.onrender.com/health)
+  - `rootDir`: `backend`
+  - Env: `MONGO_URI`, `JWT_SECRET`, `AI_SERVICE_URL=https://intellicare-ai-service.onrender.com`
+- **AI Microservice**: [https://intellicare-ai-service.onrender.com](https://intellicare-ai-service.onrender.com/health)
+  - `rootDir`: `ai_service`
+  - Env: `GEMINI_API_KEY`, `GEMINI_MODEL=gemini-3.5-flash`, `PYTHON_VERSION=3.11.8`
+  - Blueprint: Pre-configured in [`render.yaml`](render.yaml).
 
 ---
 
