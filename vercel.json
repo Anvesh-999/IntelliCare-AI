@@ -2,6 +2,7 @@
   "version": 2,
   "rewrites": [
     { "source": "/api/:path*", "destination": "https://intellicare-backend-hb1z.onrender.com/api/:path*" },
+    { "source": "/ai/:path*", "destination": "https://intellicare-ai-service.onrender.com/ai/:path*" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

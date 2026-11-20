@@ -31,3 +31,11 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.8
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-3.8-flash
+      - key: INTERNAL_SERVICE_TOKEN
+        value: intellicare_internal_ai_secret_token_2026
+      - key: ALLOWED_ORIGINS
+        value: http://localhost:3000,http://localhost:5000,https://intelli-care-ai-dalt.vercel.app
